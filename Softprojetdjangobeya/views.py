@@ -117,13 +117,13 @@ def upload_project_teacher(request):
             return redirect('my_projects_teacher')
     else:
         form = ProjectUploadForm()
-    return render(request, 'upload_project_teacher.html', {'form': form})
+    return render(request, 'teacher/upload_project_teacher.html', {'form': form})
 
 
 @login_required
 def my_projects_teacher(request):
     projects = Project.objects.filter(uploaded_by=request.user)
-    return render(request, 'my_projects_teacher.html', {'projects': projects})
+    return render(request, 'teacher/my_projects_teacher.html', {'projects': projects})
 
 
 @login_required

@@ -87,19 +87,53 @@
                 Dashboard
               </a>
               <div class="nav">
-                <div class="sb-sidenav-menu-heading">Authentification</div>
-                <a class="nav-link" href="{% url 'login_view' %}">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-sign-in-alt"></i>
-                  </div>
-                  Connexion
-                </a>
-                <a class="nav-link" href="{% url 'register' %}">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-user-plus"></i>
-                  </div>
-                  Inscription
-                </a>
+                {% if user.is_authenticated %}
+                                    {% if user.role == 'admin' %}
+                                        <div class="sb-sidenav-menu-heading">Administration</div>
+                                        <a class="nav-link" href="#">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                                            Chargement de Projet
+                                        </a>
+                                        <a class="nav-link" href="#">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-tasks"></i></div>
+                                            Gestion des Projets
+                                        </a>
+                                        <a class="nav-link" href="#">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                            Gestion des Utilisateurs
+                                        </a>
+                                    {% elif user.role == 'teacher' %}
+                                        <div class="sb-sidenav-menu-heading">Enseignant</div>
+                                        <a class="nav-link" href="#">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-upload"></i></div>
+                                            Chargement de Projet
+                                        </a>
+                                        <a class="nav-link" href="#">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                            Mes Projets
+                                        </a>
+                                    {% else %}
+                                        <div class="sb-sidenav-menu-heading">Étudiant</div>
+                                        <a class="nav-link" href="{% url 'my_projects_student' %}">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                                            Mes Projets
+                                        </a>
+                                    {% endif %}
+                                    <a class="nav-link" href="{% url 'logout' %}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+                                        Déconnexion
+                                    </a>
+                                {% else %}
+                                    <div class="sb-sidenav-menu-heading">Authentification</div>
+                                    <a class="nav-link" href="{% url 'login' %}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-sign-in-alt"></i></div>
+                                        Connexion
+                                    </a>
+                                    <a class="nav-link" href="{% url 'signup' %}">
+                                        <div class="sb-nav-link-icon"><i class="fas fa-user-plus"></i></div>
+                                        Inscription
+                                    </a>
+                                {% endif %}
               </div>
             </div>
           </div>
@@ -178,29 +212,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-xl-6">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Area Chart Example
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myAreaChart" width="100%" height="40"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="card mb-4">
-                  <div class="card-header">
-                    <i class="fas fa-chart-bar me-1"></i>
-                    Bar Chart Example
-                  </div>
-                  <div class="card-body">
-                    <canvas id="myBarChart" width="100%" height="40"></canvas>
-                  </div>
-                </div>
-              </div>
+           </div>
             </div>
           </div>
         </main>

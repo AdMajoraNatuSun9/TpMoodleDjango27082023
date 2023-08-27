@@ -20,7 +20,8 @@ from Softprojetdjangobeya import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('admindash', views.adminPage, name='admin'),
+    path('admindash/', views.adminPage, name='admin'),
+    path('teacherdash/', views.teacherPage, name='teacher'),
     path('', include('Softprojetdjangobeya.urls')),
     path('upload/', views.upload_project, name='upload_project'),
     path('manage/', views.manage_projects, name='manage_projects'),
